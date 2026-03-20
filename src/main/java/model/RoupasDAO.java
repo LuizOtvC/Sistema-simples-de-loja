@@ -67,4 +67,23 @@ public class RoupasDAO {
            e.printStackTrace(); 
         }
     }
+    
+    public void update(RoupasBean update){
+        try{
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+            
+            stmt = conn.prepareStatement("UPDATE produtos set nome = ?, preco = ?, quantidade = ? WHERE id = ? ");
+            
+            stmt.setString(1, update.getNome());
+            stmt.setDouble(2, update.getPreco());
+            stmt.setInt(3, update.getQuantidade());
+            stmt.setInt(4, update.getId());
+            
+            stmt.executeUpdate();
+        }catch (SQLException e){
+           e.printStackTrace(); 
+        }
+        
+    }
 }
