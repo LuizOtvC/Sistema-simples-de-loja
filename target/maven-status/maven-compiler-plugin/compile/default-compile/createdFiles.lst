@@ -1,6 +1,7 @@
 telas\tela$2.class
 telas\Cadastro.class
 telas\Login.class
+telas\Compra$1.class
 telas\Estoque$3.class
 telas\Cadastro$6.class
 model\UsuarioBean.class
@@ -10,8 +11,10 @@ telas\Login$3.class
 telas\Cadastro$3.class
 telas\Deletar$5.class
 conexao\Conexao.class
+telas\Compra$3.class
 telas\Login$4.class
 telas\Estoque$5.class
+telas\tela$4.class
 telas\Cadastro$5.class
 telas\coloxar.class
 model\UsuarioDAO.class
@@ -20,12 +23,14 @@ telas\tela.class
 telas\coloxar$1.class
 telas\Deletar$3.class
 telas\Estoque$2.class
+telas\Compra.class
 telas\Login$1.class
 model\RoupasBean.class
 model\RoupasDAO.class
 telas\Deletar$4.class
 telas\Login$7.class
 telas\Login$2.class
+telas\Compra$2.class
 telas\Cadastro$2.class
 telas\tela$1.class
 telas\Deletar$1.class

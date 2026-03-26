@@ -12,12 +12,12 @@ import model.UsuarioDAO;
  */
 public class Login extends javax.swing.JFrame {
 
-        Conexao conn = new Conexao();
+        
         
         
     public Login() {
         initComponents();
-        conn.testarConexao();
+        
 }
     
     /**
