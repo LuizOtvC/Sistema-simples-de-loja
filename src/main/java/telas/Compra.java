@@ -6,6 +6,7 @@ package telas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -19,51 +20,28 @@ import model.RoupasDAO;
  */
 public class Compra extends javax.swing.JFrame {
 
-           /**
+    List<RoupasBean> lista = new ArrayList<RoupasBean>();
+
+    /**
      * Creates new form Compra
      */
     public Compra() {
         initComponents();
         listar_itens();
-        jComboBox1.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            int linha = jComboBox1.getSelectedIndex();
-            if (linha != -1) {
-                System.out.println("Voce selecionou a posicao: " + linha);
-                id.setText("");
-                id.setText(String.valueOf(linha));
-                preco();
-            } else {
-                System.out.println("voce não selecionou nada");
-            }
-        }
-    });
-   }
-    
-    public void listar_itens() {
-    RoupasDAO dao = new RoupasDAO();   
-    List<RoupasBean> lista = dao.ler();
-    
-    DefaultComboBoxModel modelo = (DefaultComboBoxModel) jComboBox1.getModel();
-    
-    modelo.removeAllElements(); 
-
-    for (RoupasBean r : lista) {
-        modelo.addElement(r.getNome());
+        jTextArea1.setText("");
     }
-}
-    
-    public void preco(){
-        int idDigitado = Integer.parseInt(id.getText());
-        RoupasDAO dao = new RoupasDAO();  
-        List<RoupasBean> lista = dao.ler();
-        
-        for(RoupasBean r : lista){
-            if(r.getId() == idDigitado){
-                Preco.setText(String.valueOf(r.getPreco()));
-            }
-        }    
+
+    public void listar_itens() {
+        RoupasDAO dao = new RoupasDAO();
+        lista = dao.ler();
+
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) jComboBox1.getModel();
+
+        modelo.removeAllElements();
+
+        for (RoupasBean r : lista) {
+            modelo.addElement(r.getNome());
+        }
     }
 
     /**
@@ -81,52 +59,111 @@ public class Compra extends javax.swing.JFrame {
         preco = new javax.swing.JLabel();
         id = new javax.swing.JLabel();
         Preco = new javax.swing.JLabel();
+        Quantidade = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(70, 130, 180));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Compra");
 
+        jComboBox1.setBackground(new java.awt.Color(0, 0, 0));
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
         jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBox1MouseClicked(evt);
             }
         });
 
-        id.setText("a");
+        id.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        id.setForeground(new java.awt.Color(255, 255, 255));
+        id.setText("id");
 
+        Preco.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        Preco.setForeground(new java.awt.Color(255, 255, 255));
         Preco.setText("a");
+
+        Quantidade.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        Quantidade.setForeground(new java.awt.Color(255, 255, 255));
+        Quantidade.setText("a");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Quantos deseja comprar?");
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(101, 101, 101)
+                .addGap(89, 89, 89)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(42, 42, 42)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Preco, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(preco)))
-                .addContainerGap(451, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Preco, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(17, 17, 17)
+                                .addComponent(Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(preco)))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel1)
-                .addGap(55, 55, 55)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(preco)
                     .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Preco, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(410, Short.MAX_VALUE))
+                    .addComponent(Preco, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(77, 77, 77)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(260, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -146,6 +183,58 @@ public class Compra extends javax.swing.JFrame {
     private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int quantidadeCompra = Integer.valueOf(jTextArea1.getText());
+        int estoqueq = Integer.valueOf(Quantidade.getText());
+        if (quantidadeCompra > 0) {
+            if (quantidadeCompra <= estoqueq) {
+                int quantidadenova = estoqueq - quantidadeCompra;
+                RoupasDAO dao = new RoupasDAO();
+                int ida = Integer.valueOf(id.getText());
+                dao.updatEstoq(ida, quantidadenova);
+                JOptionPane.showMessageDialog(null, "Compra bem sucedida!");
+                listar_itens();
+            }
+            
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        String linha = jComboBox1.getSelectedItem() != null ? jComboBox1.getSelectedItem().toString() : "";
+
+        for (RoupasBean r : lista) {
+            if (r.getNome().equals(linha)) {
+                id.setText(String.valueOf(r.getId()));
+                Preco.setText(String.valueOf(r.getPreco()));
+                Quantidade.setText(String.valueOf(r.getQuantidade()));
+
+                //         System.out.println(linha);
+                //          if (!linha.isBlank()) {
+//                int idBuscado = linha + 1;
+//                System.out.println("Voce selecionou a posicao: " + idBuscado);
+//                id.setText("");
+//                Preco.setText("");
+//                Quantidade.setText("");
+                //               RoupasDAO dao = new RoupasDAO();  
+//                List<RoupasBean> lista = dao.ler();
+//                for(RoupasBean r : lista){
+//            if(r.getId() == idBuscado){
+//                id.setText(String.valueOf(r.getId()));
+//                Preco.setText(String.valueOf(r.getPreco()));
+//                Quantidade.setText(String.valueOf(r.getQuantidade()));
+//            }
+//                }     
+//              
+//            } else {
+//                System.out.println("voce não selecionou nada");
+            }
+        }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+    
 
     /**
      * @param args the command line arguments
@@ -184,10 +273,15 @@ public class Compra extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Preco;
+    private javax.swing.JLabel Quantidade;
     private javax.swing.JLabel id;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel preco;
     // End of variables declaration//GEN-END:variables
 }
