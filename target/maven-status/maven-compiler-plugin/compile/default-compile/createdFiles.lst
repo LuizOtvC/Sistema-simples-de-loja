@@ -18,6 +18,7 @@ telas\tela$4.class
 telas\Cadastro$5.class
 telas\coloxar.class
 model\UsuarioDAO.class
+telas\Estoque$7.class
 telas\Login$6.class
 telas\tela.class
 telas\coloxar$1.class
@@ -42,4 +43,6 @@ telas\Estoque.class
 telas\Cadastro$4.class
 telas\Estoque$1.class
 telas\Cadastro$1.class
+telas\Estoque$6.class
 telas\tela$3.class
+telas\Compra$4.class

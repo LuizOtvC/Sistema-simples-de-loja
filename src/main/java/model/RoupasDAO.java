@@ -86,4 +86,21 @@ public class RoupasDAO {
         }
         
     }
+    
+    public void updatEstoq(int id, int quantidade){
+        try{
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+            
+            stmt = conn.prepareStatement("UPDATE produtos set quantidade = ? WHERE id = ? ");
+            
+            stmt.setInt(1, quantidade);
+            stmt.setInt(2, id);
+            
+            stmt.executeUpdate();
+        }catch (SQLException e){
+           e.printStackTrace(); 
+        }
+        
+    }
 }
