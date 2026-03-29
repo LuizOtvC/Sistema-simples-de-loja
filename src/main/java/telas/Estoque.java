@@ -281,6 +281,9 @@ public class Estoque extends javax.swing.JFrame {
 
     private void botaoInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInserirActionPerformed
         // TODO add your handling code here:
+        try{
+            
+        
         String currentNome = colocarNome.getText();
         Double currentPreco = Double.valueOf(ColocarPreco.getText());   
         int currentQuantidade =Integer.parseInt(colocarQnt.getText());
@@ -294,13 +297,17 @@ public class Estoque extends javax.swing.JFrame {
         
         
         dao.cadastrar(produto);
-        JOptionPane.showMessageDialog(null, "roupa foi cadastrado com sucesso");
+        JOptionPane.showMessageDialog(null, "roupa foi cadastrado com sucesso",  "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         
         colocarNome.setText("");
         ColocarPreco.setText("");
         colocarQnt.setText("");
         
         listar_itens();
+        }catch (Exception e){
+                    JOptionPane.showMessageDialog(null, "Erro inesperado " + e.getMessage(),  "Erro", JOptionPane.ERROR_MESSAGE);
+
+        }
     }//GEN-LAST:event_botaoInserirActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -311,6 +318,7 @@ public class Estoque extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try{
         String currentNome = colocarNome.getText();
         Double currentPreco = Double.valueOf(ColocarPreco.getText());   
         int currentQuantidade =Integer.parseInt(colocarQnt.getText());
@@ -332,6 +340,9 @@ public class Estoque extends javax.swing.JFrame {
         colocarQnt.setText("");
         
         listar_itens();
+        }catch(Exception e){
+        JOptionPane.showMessageDialog(null, "Erro inesperado " + e.getMessage(),  "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

@@ -80,7 +80,7 @@ public class tela extends javax.swing.JFrame {
 
         Horario.setBackground(new java.awt.Color(255, 255, 255));
         Horario.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        Horario.setForeground(new java.awt.Color(153, 255, 153));
+        Horario.setForeground(new java.awt.Color(255, 255, 255));
         Horario.setText("...");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
