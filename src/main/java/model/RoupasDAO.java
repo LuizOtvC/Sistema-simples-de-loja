@@ -103,4 +103,24 @@ public class RoupasDAO {
         }
         
     }
+    
+    public RoupasBean buscarPorId(int id) {
+    RoupasBean roupa = null;
+    try {
+        Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM produtos WHERE id = ?");
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            roupa = new RoupasBean();
+            roupa.setId(rs.getInt("id"));
+            roupa.setNome(rs.getString("nome"));
+            roupa.setPreco(rs.getDouble("preco"));
+            roupa.setQuantidade(rs.getInt("quantidade"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return roupa;
+}
 }

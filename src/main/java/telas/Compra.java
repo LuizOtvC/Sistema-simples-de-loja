@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.RoupasBean;
 import model.RoupasDAO;
+import model.UsuarioBean;
+import model.UsuarioDAO;
 
 /**
  *
@@ -390,26 +392,43 @@ public class Compra extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int linhaSelecionada = jTable1.getSelectedRow();
-        
-            if (linhaSelecionada != -1) {
-          RoupasDAO dao = new RoupasDAO();
-                
-                
-               int modelo = jTable1.convertRowIndexToModel(linhaSelecionada);
-               int quantidadeValor = (int) jTable1.getModel().getValueAt(modelo, 3);
-               int idValor = (int) jTable1.getModel().getValueAt(modelo, 0);
-               
-                
-                dao.updatEstoq(idValor, estoqueq);
-                JOptionPane.showMessageDialog(null, "ação realizada", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                Quantidade.setText(String.valueOf(estoqueq));
-                
-             model.removeRow(linhaSelecionada);
-        } else {
-    JOptionPane.showMessageDialog(null, "nenhuma linha selecionada", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+        int quantidadeCompra = Integer.valueOf(jTextArea1.getText());
+
+// ✅ Usa o id da linha clicada na tabela
+int quantidadeDevolucao = Integer.valueOf(jTextArea1.getText());
+
+if (id_linha_selecionada == 0) {
+    JOptionPane.showMessageDialog(null, "Selecione um item na tabela!", "Erro", JOptionPane.ERROR_MESSAGE);
+    return;
+}
+
+RoupasDAO dao = new RoupasDAO();
+RoupasBean roupaAtual = dao.buscarPorId(id_linha_selecionada);
+int estoqueAtual = roupaAtual.getQuantidade();
+
+if (quantidadeDevolucao > 0) {
+    // ✅ Soma a quantidade devolvida ao estoque
+    int quantidadeNova = estoqueAtual + quantidadeDevolucao;
+
+    // ✅ Atualiza no banco
+    dao.updatEstoq(id_linha_selecionada, quantidadeNova);
+
+    // ✅ Remove a linha da tabela
+    int linhaSelecionada = jTable1.getSelectedRow();
+    if (linhaSelecionada != -1) {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.removeRow(linhaSelecionada);
+    }
+
+    JOptionPane.showMessageDialog(null, "Devolução realizada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+    LocalDateTime agora = LocalDateTime.now();
+    DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    jLabel3.setText(agora.format(formatador));
+    listar_itens();
+
+} else {
+    JOptionPane.showMessageDialog(null, "Quantidade inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
+}
     }//GEN-LAST:event_jButton3ActionPerformed
     
 
