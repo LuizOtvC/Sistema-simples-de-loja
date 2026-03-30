@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 //conexao com o banco de dados
 public class Conexao {
     private static Connection conn = null;
-    private static final String url = "jdbc:mysql://localhost:3306/gerenciador";
+    private static final String url = "jdbc:mysql://localhost:3307/gerenciador";
     private static final String user = "root";
-    private static final String senha = "12345";
+    private static final String senha = "";
    
     private Conexao(){
         

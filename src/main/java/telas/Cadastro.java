@@ -199,7 +199,7 @@ public class Cadastro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "preencha o campo nome, seu bobão");
         }else if (currentUser.trim().equals("")){
             JOptionPane.showMessageDialog(null, "preencha corretamente o campo usuario caramba");
-        }else if (currentSenha.trim().equals("")){
+        }else if (currentSenha.trim().equals("") || currentSenha.trim().length() < 8){
             JOptionPane.showMessageDialog(null, "preencha corretamente o campo senha caramba");
         }
         

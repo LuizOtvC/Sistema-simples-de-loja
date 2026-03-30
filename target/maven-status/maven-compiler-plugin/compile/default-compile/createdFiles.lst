@@ -4,6 +4,7 @@ model\UsuarioBean.class
 telas\coloxar$2.class
 telas\Deletar.class
 telas\Login$3.class
+telas\Compra$6.class
 telas\Deletar$5.class
 conexao\Conexao.class
 telas\Compra$3.class
@@ -37,6 +38,7 @@ telas\Deletar$3.class
 telas\Estoque$2.class
 telas\Login$1.class
 telas\Deletar$4.class
+telas\Compra$7.class
 telas\Login$2.class
 telas\Cadastro$2.class
 telas\tela$1.class
