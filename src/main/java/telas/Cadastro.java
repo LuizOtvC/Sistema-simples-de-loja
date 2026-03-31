@@ -196,7 +196,7 @@ public class Cadastro extends javax.swing.JFrame {
         String currentSenha = campoSenha2.getText();
         
         if(currentNome.trim().equals("")){
-            JOptionPane.showMessageDialog(null, "preencha o campo nome, seu bobão");
+            JOptionPane.showMessageDialog(null, "preencha o campo nome corretamente");
         }else if (currentUser.trim().equals("")){
             JOptionPane.showMessageDialog(null, "preencha corretamente o campo usuario caramba");
         }else if (currentSenha.trim().equals("") || currentSenha.trim().length() < 8){
