@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import model.UsuarioBean;
 import model.UsuarioDAO;
+import model.UsuarioLogado;
 
 /**
  *
@@ -17,6 +18,7 @@ public class Login extends javax.swing.JFrame {
         
     public Login() {
         initComponents();
+        
         
 }
     
@@ -60,17 +62,14 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Senha");
 
-        campoUsuario.setBackground(new java.awt.Color(255, 255, 255));
-        campoUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        campoUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         campoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoUsuarioActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Entrar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,9 +77,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Não possui cadastro?");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,8 +85,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        campoSenha.setBackground(new java.awt.Color(255, 255, 255));
-        campoSenha.setForeground(new java.awt.Color(0, 0, 0));
         campoSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoSenhaActionPerformed(evt);
@@ -100,9 +95,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("LOGIN");
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("Sair");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,22 +193,26 @@ public class Login extends javax.swing.JFrame {
         String currentSenha = campoSenha.getText();
         
         if(currentUser.trim().equals("")){
-            JOptionPane.showMessageDialog(null, "preencha corretamente o campo usuario, seu bobão");
+            JOptionPane.showMessageDialog(null, "preencha corretamente o campo usuario");
         }else if (currentSenha.trim().equals("")){
-            JOptionPane.showMessageDialog(null, "preencha corretamente o campo senha caramba");
+            JOptionPane.showMessageDialog(null, "preencha corretamente o campo senha");
         }else{
             
             UsuarioDAO dao = new UsuarioDAO();   
             UsuarioBean usuarioLogado = dao.logar(currentUser, currentSenha);
             
             if(usuarioLogado.getId() > 0){
+                 UsuarioLogado.setId(usuarioLogado.getId());
+                 UsuarioLogado.setNome(usuarioLogado.getNome());
+                 
                 JOptionPane.showMessageDialog(null,"bem vindo " + currentUser + "!");
-               
                 tela inicial = new tela();
                 inicial.setVisible(true);
                 this.dispose();
+               
+                
         }else{
-                JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos");
+                JOptionPane.showMessageDialog(null, "Erro inesperado", "erro", JOptionPane.ERROR_MESSAGE);
             }
             
             

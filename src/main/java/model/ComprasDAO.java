@@ -34,9 +34,10 @@ public class ComprasDAO {
 
                 roupas.setId(rs.getInt("id"));
                 roupas.setNome(rs.getString("nome"));
-                roupas.setPreco_total(rs.getDouble("preco_total"));
+                roupas.setPreco(rs.getDouble("preco"));
                 roupas.setQuantidade(rs.getInt("quantidade"));
                 roupas.setData(rs.getString("data"));
+                roupas.setPrecoTotal(rs.getDouble("PrecoTotal"));
                 dados.add(roupas);
             }
 
@@ -50,13 +51,14 @@ public class ComprasDAO {
     public void salvar(ComprasBean c) {
         try {
             Connection conn = Conexao.conectar();
-            String sql = "INSERT INTO compras (id_roupa, nome, preco_total, quantidade, data) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO compras (id_roupa, nome, preco, quantidade, data, PrecoTotal) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, c.getId_roupa());
             ps.setString(2, c.getNome());
-            ps.setDouble(3, c.getPreco_total());
+            ps.setDouble(3, c.getPreco());
             ps.setInt(4, c.getQuantidade());
             ps.setString(5, c.getData());
+            ps.setDouble(6, c.getPrecoTotal());
             ps.executeUpdate();
             System.out.println("salvo");
         } catch (Exception e) {

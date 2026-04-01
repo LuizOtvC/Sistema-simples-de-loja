@@ -8,6 +8,7 @@ package telas;
 import javax.swing.JOptionPane;
 import model.UsuarioBean;
 import model.UsuarioDAO;
+import model.UsuarioLogado;
 
 /**
  *
@@ -19,9 +20,13 @@ public class Cadastro extends javax.swing.JFrame {
      * Creates new form Cadastro
      */
     public Cadastro() {
+        if(UsuarioLogado.getId() > 0){
         initComponents();
+    }else{
+            new Login().setVisible(true);
+                this.dispose();
+        }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -201,9 +206,8 @@ public class Cadastro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "preencha corretamente o campo usuario caramba");
         }else if (currentSenha.trim().equals("") || currentSenha.trim().length() < 8){
             JOptionPane.showMessageDialog(null, "preencha corretamente o campo senha caramba");
-        }
-        
-        UsuarioDAO dao = new UsuarioDAO();   
+        }else{
+            UsuarioDAO dao = new UsuarioDAO();   
         
         UsuarioBean usuarios = new UsuarioBean();
         usuarios.setNome(currentNome);
@@ -220,6 +224,9 @@ public class Cadastro extends javax.swing.JFrame {
         
         new Login().setVisible(true);
         this.setVisible(false);
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

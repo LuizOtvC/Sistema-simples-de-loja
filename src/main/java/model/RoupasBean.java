@@ -11,17 +11,19 @@ package model;
 public class RoupasBean {
     private int id;
     private String nome;
-    private Double preco;
+    private double preco;
     private int quantidade;
+    private double precoTotal;
 
     public RoupasBean() {
     }
 
-    public RoupasBean(int id, String nome, Double preco, int quantidade) {
+    public RoupasBean(int id, String nome, double preco, int quantidade, double precoTotal) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.quantidade = quantidade;
+        this.precoTotal = precoTotal;
     }
 
     public int getId() {
@@ -40,11 +42,11 @@ public class RoupasBean {
         this.nome = nome;
     }
 
-    public Double getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 
@@ -55,6 +57,14 @@ public class RoupasBean {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-    
+
+    public double getPrecoTotal() {
+        return precoTotal;
+    }
+
+    public void setPrecoTotal(double precoTotal) {
+        this.precoTotal = precoTotal;
+    }
+
     
 }

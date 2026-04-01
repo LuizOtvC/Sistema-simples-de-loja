@@ -28,6 +28,7 @@ public class RoupasDAO {
                 roupas.setNome(rs.getString("nome"));
                 roupas.setPreco(rs.getDouble("preco"));
                 roupas.setQuantidade(rs.getInt("quantidade"));
+                roupas.setPrecoTotal(rs.getDouble("PrecoTotal"));
 
                 dados.add(roupas);
             }
@@ -68,24 +69,25 @@ public class RoupasDAO {
         }
     }
     
-    public void update(RoupasBean update){
-        try{
-            Connection conn = Conexao.conectar();
-            PreparedStatement stmt = null;
-            
-            stmt = conn.prepareStatement("UPDATE produtos set nome = ?, preco = ?, quantidade = ? WHERE id = ? ");
-            
-            stmt.setString(1, update.getNome());
-            stmt.setDouble(2, update.getPreco());
-            stmt.setInt(3, update.getQuantidade());
-            stmt.setInt(4, update.getId());
-            
-            stmt.executeUpdate();
-        }catch (SQLException e){
-           e.printStackTrace(); 
-        }
-        
+    // jeito moderno — try-with-resources fecha tudo automaticamente
+public void update(RoupasBean update) {
+    String sql = "UPDATE produtos SET nome = ?, preco = ?, quantidade = ?, PrecoTotal = ? WHERE id = ?";
+    
+    try (Connection conn = Conexao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, update.getNome());
+        stmt.setDouble(2, update.getPreco());
+        stmt.setInt(3, update.getQuantidade());
+        stmt.setDouble(4, update.getPrecoTotal());
+        stmt.setInt(5, update.getId());
+
+        stmt.executeUpdate();
+
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+}
     
     public void updatEstoq(int id, int quantidade){
         try{
@@ -117,6 +119,7 @@ public class RoupasDAO {
             roupa.setNome(rs.getString("nome"));
             roupa.setPreco(rs.getDouble("preco"));
             roupa.setQuantidade(rs.getInt("quantidade"));
+            roupa.setPrecoTotal(rs.getDouble("PrecoTotal"));
         }
     } catch (SQLException e) {
         e.printStackTrace();
