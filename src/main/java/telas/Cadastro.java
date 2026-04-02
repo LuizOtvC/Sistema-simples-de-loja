@@ -60,8 +60,6 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Usuario");
 
-        campousuC.setBackground(new java.awt.Color(255, 255, 255));
-        campousuC.setForeground(new java.awt.Color(0, 0, 0));
         campousuC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campousuCActionPerformed(evt);
@@ -72,9 +70,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("CADASTRO");
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(46, 139, 87));
         jButton1.setText("cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,9 +78,7 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(240, 128, 128));
         jButton2.setText("Login");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,20 +91,14 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nome");
 
-        campousuC1.setBackground(new java.awt.Color(255, 255, 255));
-        campousuC1.setForeground(new java.awt.Color(0, 0, 0));
         campousuC1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campousuC1ActionPerformed(evt);
             }
         });
 
-        campoSenha2.setBackground(new java.awt.Color(255, 255, 255));
-        campoSenha2.setForeground(new java.awt.Color(0, 0, 0));
-
         verSenha.setBackground(new java.awt.Color(70, 130, 180));
         verSenha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        verSenha.setForeground(new java.awt.Color(0, 0, 0));
         verSenha.setText("ver senha");
         verSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,10 +187,10 @@ public class Cadastro extends javax.swing.JFrame {
         
         if(currentNome.trim().equals("")){
             JOptionPane.showMessageDialog(null, "preencha o campo nome corretamente");
-        }else if (currentUser.trim().equals("")){
-            JOptionPane.showMessageDialog(null, "preencha corretamente o campo usuario caramba");
+        }else if (currentUser.trim().equals("") || currentUser.trim().length() < 8){
+            JOptionPane.showMessageDialog(null, "preencha corretamente o campo usuario");
         }else if (currentSenha.trim().equals("") || currentSenha.trim().length() < 8){
-            JOptionPane.showMessageDialog(null, "preencha corretamente o campo senha caramba");
+            JOptionPane.showMessageDialog(null, "preencha corretamente o campo senha");
         }else{
             UsuarioDAO dao = new UsuarioDAO();   
         
