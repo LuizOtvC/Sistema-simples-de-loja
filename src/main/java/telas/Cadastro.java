@@ -20,12 +20,9 @@ public class Cadastro extends javax.swing.JFrame {
      * Creates new form Cadastro
      */
     public Cadastro() {
-        if(UsuarioLogado.getId() > 0){
+        
         initComponents();
-    }else{
-            new Login().setVisible(true);
-                this.dispose();
-        }
+    
     }
     /**
      * This method is called from within the constructor to initialize the form.

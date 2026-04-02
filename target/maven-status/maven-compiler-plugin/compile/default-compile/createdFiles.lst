@@ -16,11 +16,11 @@ telas\Cadastro$5.class
 model\UsuarioDAO.class
 telas\Login$6.class
 telas\Compra$11.class
+telas\tela$7.class
 telas\Compra.class
 model\RoupasBean.class
 model\RoupasDAO.class
 telas\Login$7.class
-telas\Compra$13.class
 telas\Compra$2.class
 telas\Deletar$2.class
 model\UsuarioLogado.class
