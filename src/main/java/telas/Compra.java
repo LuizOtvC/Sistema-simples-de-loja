@@ -248,7 +248,6 @@ public class Compra extends javax.swing.JFrame {
 
         TotalCompra.setEditable(false);
         TotalCompra.setBackground(new java.awt.Color(255, 255, 255));
-        TotalCompra.setForeground(new java.awt.Color(0, 0, 0));
         TotalCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TotalCompraActionPerformed(evt);
@@ -448,6 +447,7 @@ public class Compra extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
        
         new tela().setVisible(true);
         this.setVisible(false);

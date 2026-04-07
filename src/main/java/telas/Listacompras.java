@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.ComprasBean;
 import model.ComprasDAO;
+import model.RoupasBean;
 import model.RoupasDAO;
 import model.UsuarioLogado;
 
@@ -112,6 +113,11 @@ public void listar_itenss (){
                 jComboBox1ItemStateChanged(evt);
             }
         });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 36)); // NOI18N
@@ -198,16 +204,26 @@ public void listar_itenss (){
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         // TODO add your handling code here:
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        for (int i = 0; i < modelo.getRowCount(); i ++){
-            String dataFiltro = String.valueOf(jComboBox1.getItemAt(i));
-
-            TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) jTable1.getModel());
-            jTable1.setRowSorter(sorter);
-            sorter.setRowFilter(RowFilter.regexFilter(dataFiltro, 4));
-           sorter.setRowFilter(null);
-        }
+        String linha = jComboBox1.getSelectedItem() != null ? jComboBox1.getSelectedItem().toString() : "";
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for (ComprasBean r : lista) {
+            if (linha.isEmpty() || r.getData().equals(linha)) {
+                model.addRow(new Object[]{
+            r.getId(),
+            r.getNome(),
+            r.getPreco(),
+            r.getQuantidade(),
+            r.getData(),
+           r.getPrecoTotal()
+        });
+    }
+    }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
