@@ -47,6 +47,7 @@ public class Login extends javax.swing.JFrame {
         senhacorr = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
 
         jPanel1.setBackground(new java.awt.Color(70, 130, 180));
         jPanel1.setForeground(new java.awt.Color(153, 255, 51));

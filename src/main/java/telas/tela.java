@@ -61,6 +61,7 @@ public class tela extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela de Início");
 
         jPanel1.setBackground(new java.awt.Color(70, 130, 180));
 
