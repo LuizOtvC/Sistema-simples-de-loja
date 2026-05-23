@@ -386,48 +386,56 @@ public class Compra extends javax.swing.JFrame {
         }else{          
           int quantidadeCompra = Integer.valueOf(jTextArea1.getText());
         estoqueq = Integer.valueOf(Quantidadetxt.getText());
-        if (quantidadeCompra > 0) {
-            if (quantidadeCompra <= estoqueq) {
-                int quantidadenova = estoqueq - quantidadeCompra;
-                System.out.println(quantidadenova);
-                RoupasDAO dao = new RoupasDAO();
-                RoupasBean produto = new RoupasBean();
-                
-                produto.setId(Integer.valueOf(idtxt.getText()));
-                produto.setNome(String.valueOf(jComboBox1.getSelectedItem()));
-                produto.setPreco(Double.valueOf(Precotxt.getText()));
-                produto.setQuantidade(Integer.parseInt(String.valueOf(quantidadeCompra)));
-                produto.setPrecoTotal(produto.getPreco() * produto.getQuantidade());
-                
-                int ida = Integer.valueOf(idtxt.getText());
-                DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-                modelo.addRow(new Object[]{
-            produto.getId(),
-            produto.getNome(),
-            produto.getPreco(),
-            produto.getQuantidade(),
-            produto.getPrecoTotal()
-        });
-                double total = 0;
-                for (int i = 0; i < modelo.getRowCount(); i++) {
-                 double valor = Double.parseDouble(String.valueOf(modelo.getValueAt(i, 4)));
-                    total += valor;
-                }
-                TotalCompra.setText(String.valueOf(total));
-                             
-                                
-                JOptionPane.showMessageDialog(null, "Operação concluída!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                LocalDateTime agora = LocalDateTime.now();
-                DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                jLabel3.setText(agora.format(formatador));
-                listar_itens();
-            }
-            
+        
+        if (quantidadeCompra <= estoqueq) {
+    int quantidadenova = estoqueq - quantidadeCompra;
+Quantidadetxt.setText(String.valueOf(quantidadenova));
 
-        }else{
-            JOptionPane.showMessageDialog(null, "Quantidade no estoque insuficiente", "Erro", JOptionPane.ERROR_MESSAGE);
-        }  
-        }        
+RoupasBean produto = new RoupasBean();
+produto.setId(Integer.valueOf(idtxt.getText()));
+produto.setNome(String.valueOf(jComboBox1.getSelectedItem()));
+produto.setPreco(Double.valueOf(Precotxt.getText()));
+produto.setQuantidade(quantidadeCompra);
+produto.setPrecoTotal(produto.getPreco() * produto.getQuantidade());
+
+for (RoupasBean r : lista) {
+    if (r.getId() == produto.getId()) {
+        r.setQuantidade(quantidadenova);
+        break;
+    }
+}
+
+RoupasDAO dao = new RoupasDAO();
+dao.updatEstoq(produto.getId(), quantidadenova);
+
+DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+modelo.addRow(new Object[]{
+    produto.getId(),
+    produto.getNome(),
+    produto.getPreco(),
+    produto.getQuantidade(),
+    produto.getPrecoTotal()
+});
+
+double total = 0;
+for (int i = 0; i < modelo.getRowCount(); i++) {
+    double valor = Double.parseDouble(String.valueOf(modelo.getValueAt(i, 4)));
+    total += valor;
+}
+TotalCompra.setText(String.valueOf(total));
+
+JOptionPane.showMessageDialog(null, "Operação concluída!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+LocalDateTime agora = LocalDateTime.now();
+DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+jLabel3.setText(agora.format(formatador));
+listar_itens(); 
+} else {
+        JOptionPane.showMessageDialog(null, "Quantidade no estoque insuficiente", "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+        
+
+        }
+            
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
@@ -516,6 +524,7 @@ if (quantidadeDevolucao > 0) {
         ComprasDAO compras = new ComprasDAO();
         for(int i = 0; i < modelo.getRowCount(); i++){
             ComprasBean compra = new ComprasBean();
+            
             compra.setNome(String.valueOf(modelo.getValueAt(i, 1)));
             compra.setPreco(Double.parseDouble(String.valueOf(modelo.getValueAt(i, 2))));
             compra.setQuantidade(Integer.parseInt(String.valueOf(modelo.getValueAt(i, 3))));
@@ -524,6 +533,7 @@ if (quantidadeDevolucao > 0) {
             
     
         compras.salvar(compra);
+       
         double total = 0;
                 for (int r = 0; i < modelo.getRowCount(); i++) {
                  double valor = Double.parseDouble(String.valueOf(modelo.getValueAt(r, 4)));

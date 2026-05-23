@@ -69,7 +69,7 @@ public class RoupasDAO {
         }
     }
     
-    // jeito moderno — try-with-resources fecha tudo automaticamente
+    
 public void update(RoupasBean update) {
     String sql = "UPDATE produtos SET nome = ?, preco = ?, quantidade = ?, PrecoTotal = ? WHERE id = ?";
     
