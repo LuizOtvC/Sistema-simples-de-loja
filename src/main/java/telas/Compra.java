@@ -535,7 +535,7 @@ if (quantidadeDevolucao > 0) {
         compras.salvar(compra);
        
         double total = 0;
-                for (int r = 0; i < modelo.getRowCount(); i++) {
+                for (int r = 0; r < modelo.getRowCount(); r++) {
                  double valor = Double.parseDouble(String.valueOf(modelo.getValueAt(r, 4)));
                     total += valor;
                 }

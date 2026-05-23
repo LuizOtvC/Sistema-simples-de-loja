@@ -134,7 +134,7 @@ public class Inserir extends javax.swing.JFrame {
         jLabel3.setText("QUANTIDADE:");
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Voltar ao menu");
+        jButton2.setText("Voltar para menu");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
